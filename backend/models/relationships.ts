@@ -10,6 +10,11 @@
 import type { Customer } from './Customer';
 import type { CustomerGroup } from './CustomerGroup';
 import type { CustomerGroupMember } from './CustomerGroupMember';
+import type { Category } from './Category';
+import type { Product } from './Product';
+import type { Inventory } from './Inventory';
+import type { InventoryMovement } from './InventoryMovement';
+import type { PurchaseOrderItem } from './PurchaseOrderItem';
 
 /** A customer together with every group they belong to. */
 export interface CustomerWithGroups extends Customer {
@@ -26,4 +31,12 @@ export interface CustomerGroupWithCustomers extends CustomerGroup {
 export interface CustomerGroupMemberDetail extends CustomerGroupMember {
   customer: Customer;
   group: CustomerGroup;
+}
+
+/** A product joined with its category and current inventory row. */
+export interface ProductWithDetails extends Product {
+  category: Category | null;
+  inventory: Inventory | null;
+  in_stock: boolean;
+  low_stock: boolean;
 }

@@ -21,7 +21,47 @@ export type {
   NewCustomerGroupMember,
 } from './CustomerGroupMember';
 export type {
+  Category,
+  NewCategory,
+  UpdateCategory,
+  CategoryStatus,
+} from './Category';
+export type {
+  Product,
+  NewProduct,
+  UpdateProduct,
+  ProductStatus,
+} from './Product';
+export type {
+  Inventory,
+  NewInventory,
+  UpdateInventory,
+} from './Inventory';
+export type {
+  InventoryMovement,
+  NewInventoryMovement,
+  MovementType,
+} from './InventoryMovement';
+export type {
+  Supplier,
+  NewSupplier,
+  UpdateSupplier,
+  SupplierStatus,
+} from './Supplier';
+export type {
+  PurchaseOrder,
+  NewPurchaseOrder,
+  UpdatePurchaseOrder,
+  PurchaseOrderStatus,
+} from './PurchaseOrder';
+export type {
+  PurchaseOrderItem,
+  NewPurchaseOrderItem,
+  UpdatePurchaseOrderItem,
+} from './PurchaseOrderItem';
+export type {
   CustomerWithGroups,
   CustomerGroupWithCustomers,
   CustomerGroupMemberDetail,
+  ProductWithDetails,
 } from './relationships';

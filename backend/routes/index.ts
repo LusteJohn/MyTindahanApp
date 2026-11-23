@@ -11,6 +11,13 @@ import * as users from '../controllers/userController';
 import * as customers from '../controllers/customerController';
 import * as groups from '../controllers/customerGroupController';
 import * as members from '../controllers/customerGroupMemberController';
+import * as categories from '../controllers/categoryController';
+import * as products from '../controllers/productController';
+import * as inventory from '../controllers/inventoryController';
+import * as movements from '../controllers/inventoryMovementController';
+import * as suppliers from '../controllers/supplierController';
+import * as purchaseOrders from '../controllers/purchaseOrderController';
+import * as purchaseOrderItems from '../controllers/purchaseOrderItemController';
 
 export const userRoutes = {
   list: () => users.listUsers(),
@@ -56,6 +63,78 @@ export const customerGroupMemberRoutes = {
     members.removeMemberByGroupAndCustomer(groupId, customerId),
 };
 
+export const categoryRoutes = {
+  list: () => categories.listCategories(),
+  get: (id: number) => categories.getCategory(id),
+  create: (input: Parameters<typeof categories.addCategory>[0]) =>
+    categories.addCategory(input),
+  update: (id: number, input: Parameters<typeof categories.editCategory>[1]) =>
+    categories.editCategory(id, input),
+  remove: (id: number) => categories.deleteCategory(id),
+};
+
+export const productRoutes = {
+  list: () => products.listProducts(),
+  get: (id: number) => products.getProduct(id),
+  getDetails: (id: number) => products.getProductDetails(id),
+  create: (input: Parameters<typeof products.addProduct>[0]) =>
+    products.addProduct(input),
+  update: (id: number, input: Parameters<typeof products.editProduct>[1]) =>
+    products.editProduct(id, input),
+  remove: (id: number) => products.deleteProduct(id),
+};
+
+export const inventoryRoutes = {
+  list: () => inventory.listInventory(),
+  getByProduct: (productId: number) => inventory.getInventoryByProduct(productId),
+  create: (input: Parameters<typeof inventory.addInventory>[0]) =>
+    inventory.addInventory(input),
+  update: (id: number, input: Parameters<typeof inventory.editInventory>[1]) =>
+    inventory.editInventory(id, input),
+  remove: (id: number) => inventory.deleteInventory(id),
+};
+
+export const inventoryMovementRoutes = {
+  list: () => movements.listMovements(),
+  listByProduct: (productId: number) => movements.listMovementsByProduct(productId),
+  // Records a movement and applies it to stock (returns updated inventory).
+  record: (input: Parameters<typeof movements.recordMovement>[0]) =>
+    movements.recordMovement(input),
+  remove: (id: number) => movements.deleteMovement(id),
+};
+
+export const supplierRoutes = {
+  list: () => suppliers.listSuppliers(),
+  get: (id: number) => suppliers.getSupplier(id),
+  create: (input: Parameters<typeof suppliers.addSupplier>[0]) =>
+    suppliers.addSupplier(input),
+  update: (id: number, input: Parameters<typeof suppliers.editSupplier>[1]) =>
+    suppliers.editSupplier(id, input),
+  remove: (id: number) => suppliers.deleteSupplier(id),
+};
+
+export const purchaseOrderRoutes = {
+  list: () => purchaseOrders.listPurchaseOrders(),
+  get: (id: number) => purchaseOrders.getPurchaseOrder(id),
+  create: (input: Parameters<typeof purchaseOrders.addPurchaseOrder>[0]) =>
+    purchaseOrders.addPurchaseOrder(input),
+  update: (id: number, input: Parameters<typeof purchaseOrders.editPurchaseOrder>[1]) =>
+    purchaseOrders.editPurchaseOrder(id, input),
+  remove: (id: number) => purchaseOrders.deletePurchaseOrder(id),
+};
+
+export const purchaseOrderItemRoutes = {
+  list: () => purchaseOrderItems.listItems(),
+  listByOrder: (purchaseOrderId: number) =>
+    purchaseOrderItems.listItemsByOrder(purchaseOrderId),
+  get: (id: number) => purchaseOrderItems.getItem(id),
+  create: (input: Parameters<typeof purchaseOrderItems.addItem>[0]) =>
+    purchaseOrderItems.addItem(input),
+  update: (id: number, input: Parameters<typeof purchaseOrderItems.editItem>[1]) =>
+    purchaseOrderItems.editItem(id, input),
+  remove: (id: number) => purchaseOrderItems.deleteItem(id),
+};
+
 /**
  * Single entry point grouping every route namespace.
  * Import this to reach the whole backend from one place.
@@ -65,6 +144,13 @@ export const routes = {
   customers: customerRoutes,
   customerGroups: customerGroupRoutes,
   customerGroupMembers: customerGroupMemberRoutes,
+  categories: categoryRoutes,
+  products: productRoutes,
+  inventory: inventoryRoutes,
+  inventoryMovements: inventoryMovementRoutes,
+  suppliers: supplierRoutes,
+  purchaseOrders: purchaseOrderRoutes,
+  purchaseOrderItems: purchaseOrderItemRoutes,
 } as const;
 
 export type Routes = typeof routes;
