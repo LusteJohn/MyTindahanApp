@@ -8,6 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -41,6 +42,8 @@ export default function LoginScreen() {
       const result = await routes.users.authenticate({ username, password });
       if (result.ok) {
         setLoggedInAs(result.data.name);
+        // Navigate to the products management screen after a successful login.
+        router.replace('/products');
       } else {
         setError(result.error);
       }
