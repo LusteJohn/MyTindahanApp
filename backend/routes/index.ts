@@ -19,6 +19,8 @@ export const userRoutes = {
   update: (id: number, input: Parameters<typeof users.editUser>[1]) =>
     users.editUser(id, input),
   remove: (id: number) => users.deleteUser(id),
+  authenticate: (credentials: Parameters<typeof users.authenticate>[0]) =>
+    users.authenticate(credentials),
 };
 
 export const customerRoutes = {

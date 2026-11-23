@@ -99,7 +99,9 @@ export async function initializeDatabase(): Promise<SQLiteDatabase> {
     await db.execAsync(statement);
   }
 
-  await db.runAsync('PRAGMA user_version = ?', [DATABASE_VERSION]);
+  // PRAGMA statements do not support bind parameters, so the (trusted,
+  // numeric) version constant is inlined directly.
+  await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION};`);
 
   dbInstance = db;
   return db;

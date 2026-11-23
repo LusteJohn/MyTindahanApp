@@ -13,6 +13,8 @@
  */
 
 export * from './database';
+export { initializeBackend, seedDefaultOwner, DEFAULT_OWNER } from './seed';
+export { hashPassword, verifyPassword } from './utils/password';
 export { routes } from './routes';
 export type { Routes } from './routes';
 export type * from './models';
