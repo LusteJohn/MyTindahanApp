@@ -1,0 +1,29 @@
+/**
+ * Relationship-enriched view types.
+ *
+ * The base tables are linked through `customer_group_members`
+ * (customer_groups 1 --- N customer_group_members N --- 1 customers).
+ * These types represent the joined shapes returned by the
+ * relationship-aware service queries.
+ */
+
+import type { Customer } from './Customer';
+import type { CustomerGroup } from './CustomerGroup';
+import type { CustomerGroupMember } from './CustomerGroupMember';
+
+/** A customer together with every group they belong to. */
+export interface CustomerWithGroups extends Customer {
+  groups: CustomerGroup[];
+}
+
+/** A group together with its member customers and member count. */
+export interface CustomerGroupWithCustomers extends CustomerGroup {
+  customers: Customer[];
+  member_count: number;
+}
+
+/** A membership row joined with its customer and group records. */
+export interface CustomerGroupMemberDetail extends CustomerGroupMember {
+  customer: Customer;
+  group: CustomerGroup;
+}
