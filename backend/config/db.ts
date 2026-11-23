@@ -10,7 +10,7 @@ import * as SQLite from 'expo-sqlite';
 
 export const DATABASE_NAME = 'mytindahan.db';
 
-export const DATABASE_VERSION = 1;
+export const DATABASE_VERSION = 2;
 
 /**
  * Table names kept in one place so models/services/controllers never
@@ -21,6 +21,13 @@ export const TABLES = {
   customers: 'customers',
   customerGroups: 'customer_groups',
   customerGroupMembers: 'customer_group_members',
+  categories: 'categories',
+  products: 'products',
+  inventory: 'inventory',
+  inventoryMovements: 'inventory_movements',
+  suppliers: 'suppliers',
+  purchaseOrders: 'purchase_orders',
+  purchaseOrderItems: 'purchase_order_items',
 } as const;
 
 export type TableName = (typeof TABLES)[keyof typeof TABLES];
